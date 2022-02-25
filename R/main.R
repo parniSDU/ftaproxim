@@ -1,5 +1,23 @@
-
-#Hazard Rate
+#' Hazard Rate Function
+#'
+#' This function calculates ....
+#'
+#' @param t a numeric value as time
+#' @param delta a numeric value  time step
+#' @param P cumulative density function
+#' @param D density function
+#'
+#' @return  A numeric vector of hazard rate values.
+#'
+#' @details The more details should be added.
+#'
+#' @examples
+#' t <- 0.1
+#' delta <- 0.01
+#' P <- pnorm
+#' D <- dnorm
+#' h(t, delta, D,P)
+#' @export
 h<-function(t, delta, D,P,...){
   P<-sapply(t,P,lower=FALSE,...)
   D<-sapply(t,D,...)
