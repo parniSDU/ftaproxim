@@ -1,9 +1,9 @@
 #' Hazard Rate Function
 #'
-#' This function calculates ....
+#' For a given vector of times and a probability distribution function,
+#' this function calculates the hazard rate values.
 #'
 #' @param t a numeric value as time
-#' @param delta a numeric value  time step
 #' @param P cumulative density function
 #' @param D density function
 #'
@@ -12,36 +12,78 @@
 #' @details The more details should be added.
 #'
 #' @examples
-#' t <- 0.1
-#' delta <- 0.01
+#' ## Standard normal distribution
+#' t <- c(0.1,0.01)
 #' P <- pnorm
 #' D <- dnorm
-#' h(t, delta, D,P)
+#' hazard(t, D,P)
+#'
+#' ## Uniform distribution with min=2.0 and max=2.5
+#' t <- 2.2
+#' P <- punif
+#' D <- dunif
+#' hazard(t, D, P, 2.0, 2.5)
 #' @export
-h<-function(t, delta, D,P,...){
-  P<-sapply(t,P,lower=FALSE,...)
+hazard<-function(t, D,P,...){
+  P<-sapply(t,P,lower.tail = FALSE,...)
   D<-sapply(t,D,...)
-  return(delta*D/P)
+  return(D/P)
 }
 
 
-#Transition Matrix
+#' Transition Probability Matrix
+#'
+#' This function returns a matrix of transition probabilities at a time point for
+#' a given basic event with specified transition distribution functions.
+#'
+#' @param t a numeric value as time
+#' @param delta a numeric value as time step
+#' @param states a string vector of states' labels for the basic event
+#' @param G a matrix of 1's, 0's and NA's. 1 and NA: transition is possible, 0: transition is not possible
+#' @param dist a string vector of transition distribution functions
+#' @param param a list of parameters of the transition distribution functions
+#'
+#' @return  A numeric matrix of transition probabilities.
+#'
+#' @details The more details should be added.
+#'
+#' @examples
+#' ## failure distribution function Uniform(2, 2.5)
+#' ## and a fixed repair time of 0.3
+#' t <- 0.1
+#' delta <- 0.2
+#' states=c("OK","F")
+#' G=rbind(c(NA,1),c(1,NA))
+#' dist=c("unif", "unif")
+#' param=list(c(2, 2.5), c(0.3-delta,0.3+delta))
+#' TM(G, dist,param, t, delta, states)
+#'
+#' ## failure distribution function exp(0.001)
+#' ## and not repairable
+#' t <- 0.1
+#' delta <- 0.2
+#' states=c("OK","F")
+#' G=rbind(c(NA,1),c(0,1))
+#' dist=c("exp")
+#' param=list(c(0.001))
+#' TM(G, dist,param, t, delta, states)
+#' @export
 TM<-function(G, dist,param, t, delta, states,...){
   ns<-nrow(G)
   if (length(dist)==1){
     P<-eval(parse(text=paste("p",dist,sep="")))
     D<-eval(parse(text=paste("d",dist,sep="")))
     par<-param[[1]]
-    G[1,]<-G[1,]*h(t, delta, D, P, par)
+    G[1,]<-G[1,]*delta*hazard(t, D, P, par)
     G[1,1]<-1-sum(G[1,], na.rm = TRUE)
   }else{
     for (i in 1:ns){
       P<-eval(parse(text=paste("p",dist[i],sep="")))
       D<-eval(parse(text=paste("d",dist[i],sep="")))
       par<-param[[i]]
-      if(length(par)==1){G[i,]<-G[i,]*h(t, delta, D, P, par)
+      if(length(par)==1){G[i,]<-G[i,]*delta*hazard(t, D, P, par)
       }else{
-        G[i,]<-G[i,]*h(t, delta, D, P, par[1], par[2])
+        G[i,]<-G[i,]*delta*hazard(t, D, P, par[1], par[2])
       }
 
     }
