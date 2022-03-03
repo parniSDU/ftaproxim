@@ -106,6 +106,8 @@ TM<-function(G, dist,param, t, delta, states,...){
 #' @param state a string value
 #' @param proxel a data frame containing a state, age intensity and the probability.
 #'
+#' @return a numeric value as the age intensity
+#'
 #' @details The more details should be added.
 #'
 #' @examples
@@ -127,6 +129,8 @@ calageInt<-function(state, proxel){
 #' @param state a string value
 #' @param proxel a data frame containing a state, age intensity and a probability.
 #' @param delta a numeric value as time step
+#'
+#' @return a numeric value between 0 and 1 as the transition probability
 #'
 #' @details The more details should be added.
 #'
@@ -152,8 +156,35 @@ calProb<-function(BE, state, proxel, delta){
 }
 
 
-
-#Next Level
+#' Proxels of the next time step
+#'
+#' For a given basic event and a proxel, this function
+#' calculates all the possible proxels for the next time step.
+#'
+#' @param BE a list containing states, transition matrix, distributions and their parameters for a basic event
+#' @param proxel a data frame containing a state, age intensity and a probability.
+#' @param delta a numeric value as time step
+#'
+#' @return a data frame where each row is a proxel
+#'
+#' @details The more details should be added.
+#'
+#' @examples
+#' ## A multi-state basic event with Weibull(2, 3) transition distribution function from working (OK) to
+#' ## an Intermediate State (IS), a fixed time of 0.5 transtion from IS to failure (F),
+#' ## and a fixed repair time of 0.1 (transition from state F to state OK).
+#' BE<-list(
+#' states=c("OK","IS","F"),
+#' G=rbind(c(NA,1,0),
+#'        c(0,NA,1),
+#'        c(1,0,NA)),
+#' dist=c("weibull", "unif","unif"),
+#' param=list(c(2,3), c(0.5-delta,0.5+delta), c(0.1-delta,0.1+delta))
+#' )
+#'proxel<-data.frame(State="IS",ageInt=0.1, Prob=0.9)
+#'delta<-0.2
+#'nextLevel(BE, proxel,delta)
+#' @export
 nextLevel<-function(BE, proxel,delta){
   ns<-length(BE$states)
   if (ns==2){
@@ -176,8 +207,40 @@ nextLevel<-function(BE, proxel,delta){
 
 
 
-#Calculate Proxel
-ProxelBE<-function(BE, stat="F", TotalTime=20, delta=0.1, tol=0.000000001){
+
+#' Instantaneous Unavailability/Reliability Vector
+#'
+#' This function calculates the isntantaneous unavailablity/reliabality values
+#' of a basic event.
+#'
+#' @param BE a list containing states, transition matrix, distributions and their parameters for a basic event
+#' @param state a string value for the state
+#' @param TotalTime an integer value for the total time
+#' @param delta a numeric value as time step
+#' @param tol a numeric value for the tolerance level
+#'
+#' @return a numeric vector of instantaneous unavailabilities/reliabilities if the state is F/OK
+#'
+#' @details The more details should be added.
+#'
+#' @examples
+#' library(dplyr)
+#' library(plyr)
+#' ## A multi-state basic event with Weibull(2, 3) transition distribution function from working (OK) to
+#' ## an Intermediate State (IS), a fixed time of 0.5 transtion from IS to failure (F),
+#' ## and a fixed repair time of 0.1 (transition from state F to state OK).
+#' BE<-list(
+#' states=c("OK","IS","F"),
+#' G=rbind(c(NA,1,0),
+#'        c(0,NA,1),
+#'        c(1,0,NA)),
+#' dist=c("weibull", "unif","unif"),
+#' param=list(c(2,3), c(0.5-delta,0.5+delta), c(0.1-delta,0.1+delta))
+#' )
+#'unavailability<-ProxelBE(BE, state="F", TotalTime=20, delta=0.1, tol=0.000000001)
+#'plot(unavailability, type="l")
+#' @export
+ProxelBE<-function(BE, state, TotalTime, delta, tol){
 
   ns<-length(BE$states)
 
@@ -204,7 +267,7 @@ ProxelBE<-function(BE, stat="F", TotalTime=20, delta=0.1, tol=0.000000001){
     prox<-proxel[[i-1]]
     pL<-ldply(lapply(1:nrow(prox),ffuns),data.frame)
     Pro<-aggregate(pL['Prob'], by=pL[c('State',"ageInt")], sum)
-    indx<-which(Pro$State==stat)
+    indx<-which(Pro$State==state)
     ins[i]<-sum(Pro$Prob[indx])
     proxel[[i]]<-Pro
     print(data.frame(i,Pro))
@@ -216,5 +279,3 @@ ProxelBE<-function(BE, stat="F", TotalTime=20, delta=0.1, tol=0.000000001){
   return(ins)
 
 }
-
-
