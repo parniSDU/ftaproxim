@@ -1,12 +1,19 @@
 Package: ftaproxim
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Title: Fault Tree Analysis Based on Proxel Simulation
+Version: 0.0.1
+Authors@R: c(
+    person("Parisa", "Niloofar", email = "parni@mmmi.sdu.dk", role = "aut",
+        comment = c(ORCID = "0000-0002-3147-0078")),
+    person("Sanja", "Lazarova-Molnar", email = "slmo@mmmi.sdu.dk", role = "aut"),
+    person("Hossein", "Haghbin", email = "haghbin@pgu.ac.ir",role = c("aut", "cre"),
+        comment = c(ORCID = "0000-0001-8416-2354")))
+Maintainer: Hossein Haghbin <haghbin@pgu.ac.ir>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
+Imports: dplyr,plyr
+          
