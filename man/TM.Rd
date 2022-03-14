@@ -18,6 +18,8 @@ TM(G, dist, param, t, delta, states, ...)
 \item{delta}{a numeric value as time step}
 
 \item{states}{a string vector of states' labels for the basic event}
+
+\item{...}{other parameters}
 }
 \value{
 A numeric matrix of transition probabilities.

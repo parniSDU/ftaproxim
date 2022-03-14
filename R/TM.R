@@ -9,6 +9,7 @@
 #' @param G a matrix of 1's, 0's and NA's. 1 and NA: transition is possible, 0: transition is not possible
 #' @param dist a string vector of transition distribution functions
 #' @param param a list of parameters of the transition distribution functions
+#' @param ... other parameters
 #'
 #' @return  A numeric matrix of transition probabilities.
 #'
