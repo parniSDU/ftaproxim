@@ -9,12 +9,10 @@
 #'
 #' @return a data frame where each row is a proxel
 #'
-#' @details The more details should be added.
+#' @details A multi-state basic event with Weibull(2, 3) transition distribution function from working (OK) to an Intermediate State (IS), a fixed time of 0.5 transtion from IS to failure (F), and a fixed repair time of 0.1 (transition from state F to state OK).
 #'
 #' @examples
-#' ## A multi-state basic event with Weibull(2, 3) transition distribution function from working (OK) to
-#' ## an Intermediate State (IS), a fixed time of 0.5 transtion from IS to failure (F),
-#' ## and a fixed repair time of 0.1 (transition from state F to state OK).
+#' delta <- 0.2
 #' BE <- list(
 #'   states = c("OK", "IS", "F"),
 #'   G = rbind(

@@ -11,14 +11,12 @@
 #'
 #' @return a numeric vector of instantaneous unavailabilities/reliabilities if the state is F/OK
 #'
-#' @details The more details should be added.
+#' @details A multi-state basic event with Weibull(2, 3) transition distribution function from working (OK) to an Intermediate State (IS), a fixed time of 0.5 transtion from IS to failure (F), and a fixed repair time of 0.1 (transition from state F to state OK).
 #'
 #' @examples
-#' library(dplyr)
-#' library(plyr)
-#' ## A multi-state basic event with Weibull(2, 3) transition distribution function from working (OK) to
-#' ## an Intermediate State (IS), a fixed time of 0.5 transtion from IS to failure (F),
-#' ## and a fixed repair time of 0.1 (transition from state F to state OK).
+#' require(plyr)
+#' require(dplyr)
+#' delta <- 0.2
 #' BE <- list(
 #'   states = c("OK", "IS", "F"),
 #'   G = rbind(
@@ -31,6 +29,8 @@
 #' )
 #' unavailability <- ProxelBE(BE, state = "F", TotalTime = 20, delta = 0.1, tol = 0.000000001)
 #' plot(unavailability, type = "l")
+#' @importFrom plyr ldply
+#' @importFrom stats aggregate
 #' @export
 ProxelBE <- function(BE, state, TotalTime, delta, tol) {
   ns <- length(BE$states)
@@ -48,12 +48,10 @@ ProxelBE <- function(BE, state, TotalTime, delta, tol) {
     if (length(ind) != 0) {
       pL <- pL[-ind, ]
     }
-    pL
+    return(pL)
   }
-
-
   ffuns <- function(s) {
-    funs(BE, s, delta)
+    return(funs(BE, s, delta))
   }
   i <- 2
   while (i <= (steps)) {
@@ -67,6 +65,5 @@ ProxelBE <- function(BE, state, TotalTime, delta, tol) {
     print(data.frame(i, Pro))
     i <- i + 1
   } # i loop
-
   return(ins)
 }

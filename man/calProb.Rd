@@ -27,6 +27,7 @@ The more details should be added.
 \examples{
 ## A repairable basic event with Uniform(2, 2.5) failure distribution function
 ## and a fixed repair time of 0.3.
+delta <- 0.2
 BE <- list(
   states = c("OK", "F"),
   G = rbind(
@@ -38,6 +39,5 @@ BE <- list(
 )
 state <- "OK"
 proxel <- data.frame(State = "OK", ageInt = 0, Prob = 1)
-delta <- 0.2
 calProb(BE, state, proxel, delta)
 }

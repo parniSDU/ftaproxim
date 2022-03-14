@@ -25,14 +25,12 @@ This function calculates the isntantaneous unavailablity/reliabality values
 of a basic event.
 }
 \details{
-The more details should be added.
+A multi-state basic event with Weibull(2, 3) transition distribution function from working (OK) to an Intermediate State (IS), a fixed time of 0.5 transtion from IS to failure (F), and a fixed repair time of 0.1 (transition from state F to state OK).
 }
 \examples{
-library(dplyr)
-library(plyr)
-## A multi-state basic event with Weibull(2, 3) transition distribution function from working (OK) to
-## an Intermediate State (IS), a fixed time of 0.5 transtion from IS to failure (F),
-## and a fixed repair time of 0.1 (transition from state F to state OK).
+require(plyr)
+require(dplyr)
+delta <- 0.2
 BE <- list(
   states = c("OK", "IS", "F"),
   G = rbind(
