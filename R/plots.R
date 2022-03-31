@@ -56,9 +56,9 @@ Unalist<-as.data.frame(Unalist)
 names(Unalist)<-c("PS", "Disk", "Proc", "Mem", "Bus")
 
 #Calculating the top event's unavailability based on a given Minimal Cut Set:
-MCS<-list("PS","Bus", c("Disk", "Disk","Mem","Mem"), c("Disk", "Disk", "Proc"), 
+MCS<-list("PS","Bus", c("Disk", "Disk","Mem","Mem"), c("Disk", "Disk", "Proc"),
           c("Disk", "Disk", "Disk", "Disk"), c("Proc","Mem","Mem"),
-          c("Proc","Proc"), c("Disk", "Disk", "Proc"), 
+          c("Proc","Proc"), c("Disk", "Disk", "Proc"),
           c("Mem", "Mem","Mem","Mem"), c("Proc","Mem","Mem"),
           c("Disk", "Disk","Mem","Mem"))
 
@@ -67,7 +67,7 @@ TEUna<-function(mcs,una){
   te<-0
   for (i in 1:length(mcs)){
     if (length(mcs[[i]])==1){p<-una[,mcs[[i]]]}else{
-      p<-apply(una[,mcs[[i]]], 1, prod) 
+      p<-apply(una[,mcs[[i]]], 1, prod)
     }
     te<-p+te
   }
