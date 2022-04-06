@@ -4,8 +4,8 @@
 #' this function calculates the hazard rate values.
 #'
 #' @param t a numeric value as time
-#' @param P cumulative density function
-#' @param D density function
+#' @param P a cumulative density function
+#' @param D a density function
 #' @param ... More parameters
 #'
 #' @return  A numeric vector of hazard rate values.

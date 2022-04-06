@@ -9,9 +9,9 @@ hazard(t, D, P, ...)
 \arguments{
 \item{t}{a numeric value as time}
 
-\item{D}{density function}
+\item{D}{a density function}
 
-\item{P}{cumulative density function}
+\item{P}{a cumulative density function}
 
 \item{...}{More parameters}
 }
