@@ -5,7 +5,7 @@
 #'
 #' @param BE a list containing states, transition matrix, distributions and their parameters for a basic event
 #' @param state a string value for the state
-#' @param TotalTime an integer value for the total time
+#' @param totaltime an integer value for the total time
 #' @param delta a numeric value as time step
 #' @param tol a numeric value for the tolerance level
 #'
@@ -27,16 +27,15 @@
 #'   dist = c("weibull", "unif", "unif"),
 #'   param = list(c(2, 3), c(0.5 - delta, 0.5 + delta), c(0.1 - delta, 0.1 + delta))
 #' )
-#' unavailability <- ProxelBE(BE, state = "F", TotalTime = 20, delta = 0.1, tol = 0.000000001)
+#' unavailability <- ProxelBE(BE, state = "F", totaltime = 20, delta = 0.1, tol = 0.000000001)
 #' plot(unavailability, type = "l")
 #' @importFrom plyr ldply
 #' @importFrom stats aggregate
 #' @export
-ProxelBE <- function(BE, state, TotalTime, delta, tol) {
+ProxelBE <- function(BE, state, totaltime, delta, tol) {
   ns <- length(BE$states)
 
-  total <- TotalTime
-  steps <- total / delta
+  steps <- totaltime / delta
   ins <- numeric(steps)
   ins[1] <- 0
   proxel <- list()

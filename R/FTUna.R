@@ -1,4 +1,4 @@
-#' Fault Tree Unavailability 
+#' Fault Tree Unavailability
 #'
 #' This function returns a list where the first element is a data frame of unavailabilities
 #' and the second element is the plot of the unavailabilities
@@ -61,16 +61,12 @@
 #'
 #' @export
 FTUna<-function(belist,mcs,totaltime, delta, tol){
-  #belist<-BElist
-  #mcs<-MCS
-  #totaltime<-1
-  #delta<-0.1
-  #tol<-1e-07
+
   una<-NULL
 
   for (i in names(belist)){
     BE<-belist[[i]]
-    out<-ProxelBE(BE, "F", TotalTime=totaltime, delta=delta, tol=tol)
+    out<-ProxelBE(BE, "F", totaltime, delta, tol)
     una<-cbind(una, out)
   }
 
@@ -94,7 +90,7 @@ for (i in 1:ncol(outUna)){
 
 p <- ggplot(df, aes(x = Time))
 p <- p + geom_line(aes(y = Unavailability, colour = Event ,linetype = Event), size= 0.75)
-p <- p + theme(legend.position = "top")+ xlab(label = 'Time steps')
+p <- p + theme(legend.position = "top")+ xlab(label = 'Time Steps')
 
 out<-list(Unavailability=outUna, Plot=p)
 
