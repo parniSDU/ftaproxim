@@ -9,7 +9,6 @@
 #' @param delta a numeric value as time step
 #' @return a numeric value as the age intensity
 #'
-#' @details The more details should be added.
 #'
 #' @examples
 #' proxel <- data.frame(State = "OK", ageInt = 0, Prob = 1)

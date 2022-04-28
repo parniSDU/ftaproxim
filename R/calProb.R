@@ -9,7 +9,6 @@
 #'
 #' @return a numeric value between 0 and 1 as the transition probability
 #'
-#' @details The more details should be added.
 #'
 #' @examples
 #' ## A repairable basic event with Uniform(2, 2.5) failure distribution function

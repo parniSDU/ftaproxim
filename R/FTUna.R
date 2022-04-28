@@ -9,9 +9,9 @@
 #' @param delta a numeric value as time step
 #' @param tol a numeric value for the tolerance level
 #'
-#' @return  A list of unavailabilities for the basic events and the system and their plots againts time steps
+#' @return  A list of unavailabilities for the basic events as well as the system,
+#'          and their plots againts time steps
 #'
-#' @details The more details should be added.
 #'
 #' @examples
 #' A<-list(
