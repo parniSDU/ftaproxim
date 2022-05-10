@@ -2,35 +2,40 @@
 % Please edit documentation in R/ProxelBE.R
 \name{ProxelBE}
 \alias{ProxelBE}
-\title{Instantaneous Unavailability/Reliability Vector}
+\title{Instantaneous Unavailability Vector}
 \usage{
-ProxelBE(BE, state, TotalTime, delta, tol)
+ProxelBE(BE, state, totaltime, delta, tol)
 }
 \arguments{
 \item{BE}{a list containing states, transition matrix, distributions and their parameters for a basic event}
 
 \item{state}{a string value for the state}
 
-\item{TotalTime}{an integer value for the total time}
+\item{totaltime}{an integer value for the total time}
 
 \item{delta}{a numeric value as time step}
 
 \item{tol}{a numeric value for the tolerance level}
 }
 \value{
-a numeric vector of instantaneous unavailabilities/reliabilities if the state is F/OK
+a numeric vector of instantaneous unavailabilities when the state is F
 }
 \description{
 This function calculates the isntantaneous unavailablity/reliabality values
 of a basic event.
 }
 \details{
-A multi-state basic event with Weibull(2, 3) transition distribution function from working (OK) to an Intermediate State (IS), a fixed time of 0.5 transtion from IS to failure (F), and a fixed repair time of 0.1 (transition from state F to state OK).
+For a multistate event, if the state is IS this function returns a vector of
+        instantaneous probabilities of being in the intermediate state
 }
 \examples{
 require(plyr)
 require(dplyr)
-delta <- 0.2
+
+#A multi-state basic event with Weibull(2, 3) transition distribution function
+#from working (OK) to an Intermediate State (IS), a fixed time of 0.5 transtion
+#from IS to failure (F), and a fixed repair time of 0.1 (transition from state F to state OK).
+delta <- 0.1
 BE <- list(
   states = c("OK", "IS", "F"),
   G = rbind(
@@ -41,6 +46,6 @@ BE <- list(
   dist = c("weibull", "unif", "unif"),
   param = list(c(2, 3), c(0.5 - delta, 0.5 + delta), c(0.1 - delta, 0.1 + delta))
 )
-unavailability <- ProxelBE(BE, state = "F", TotalTime = 20, delta = 0.1, tol = 0.000000001)
-plot(unavailability, type = "l")
+probIS <- ProxelBE(BE, state = "IS", totaltime = 20, delta = 0.1, tol = 0.000000001)
+plot(probIS, type = "l")
 }

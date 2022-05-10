@@ -23,7 +23,8 @@ For a given vector of times and a probability distribution function,
 this function calculates the hazard rate values.
 }
 \details{
-The more details should be added.
+Hazard rate functions defined as the ratio of the density
+function and the survival function. That is:
 }
 \examples{
 ## Standard normal distribution

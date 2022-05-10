@@ -21,9 +21,6 @@ a numeric value between 0 and 1 as the transition probability
 \description{
 This function returns the transition probability for a given basic event and a proxel.
 }
-\details{
-The more details should be added.
-}
 \examples{
 ## A repairable basic event with Uniform(2, 2.5) failure distribution function
 ## and a fixed repair time of 0.3.

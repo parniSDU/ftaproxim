@@ -4,7 +4,7 @@
 \alias{TM}
 \title{Transition Probability Matrix}
 \usage{
-TM(G, dist, param, t, delta, states, ...)
+TM(G, dist, param, t, delta, states)
 }
 \arguments{
 \item{G}{a matrix of 1's, 0's and NA's. 1 and NA: transition is possible, 0: transition is not possible}
@@ -18,8 +18,6 @@ TM(G, dist, param, t, delta, states, ...)
 \item{delta}{a numeric value as time step}
 
 \item{states}{a string vector of states' labels for the basic event}
-
-\item{...}{other parameters}
 }
 \value{
 A numeric matrix of transition probabilities.
@@ -27,9 +25,6 @@ A numeric matrix of transition probabilities.
 \description{
 This function returns a matrix of transition probabilities at a time point for
 a given basic event with specified transition distribution functions.
-}
-\details{
-The more details should be added.
 }
 \examples{
 ## failure distribution function Uniform(2, 2.5)

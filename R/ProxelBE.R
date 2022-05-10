@@ -1,4 +1,4 @@
-#' Instantaneous Unavailability/Reliability Vector
+#' Instantaneous Unavailability Vector
 #'
 #' This function calculates the isntantaneous unavailablity/reliabality values
 #' of a basic event.
@@ -9,14 +9,19 @@
 #' @param delta a numeric value as time step
 #' @param tol a numeric value for the tolerance level
 #'
-#' @return a numeric vector of instantaneous unavailabilities/reliabilities if the state is F/OK
+#' @return a numeric vector of instantaneous unavailabilities when the state is F
 #'
-#' @details A multi-state basic event with Weibull(2, 3) transition distribution function from working (OK) to an Intermediate State (IS), a fixed time of 0.5 transtion from IS to failure (F), and a fixed repair time of 0.1 (transition from state F to state OK).
+#' @details For a multistate event, if the state is IS this function returns a vector of
+#'         instantaneous probabilities of being in the intermediate state
 #'
 #' @examples
 #' require(plyr)
 #' require(dplyr)
-#' delta <- 0.2
+#'
+#' #A multi-state basic event with Weibull(2, 3) transition distribution function
+#' #from working (OK) to an Intermediate State (IS), a fixed time of 0.5 transtion
+#' #from IS to failure (F), and a fixed repair time of 0.1 (transition from state F to state OK).
+#' delta <- 0.1
 #' BE <- list(
 #'   states = c("OK", "IS", "F"),
 #'   G = rbind(
@@ -27,8 +32,8 @@
 #'   dist = c("weibull", "unif", "unif"),
 #'   param = list(c(2, 3), c(0.5 - delta, 0.5 + delta), c(0.1 - delta, 0.1 + delta))
 #' )
-#' unavailability <- ProxelBE(BE, state = "F", totaltime = 20, delta = 0.1, tol = 0.000000001)
-#' plot(unavailability, type = "l")
+#' probIS <- ProxelBE(BE, state = "IS", totaltime = 20, delta = 0.1, tol = 0.000000001)
+#' plot(probIS, type = "l")
 #' @importFrom plyr ldply
 #' @importFrom stats aggregate
 #' @export

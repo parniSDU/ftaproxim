@@ -20,9 +20,6 @@ a numeric value as the age intensity
 This function returns a numeric value indicating
 the pending time (in terms of time steps, delta) for a given state change of a proxel.
 }
-\details{
-The more details should be added.
-}
 \examples{
 proxel <- data.frame(State = "OK", ageInt = 0, Prob = 1)
 state <- "OK"

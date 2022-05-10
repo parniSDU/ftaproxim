@@ -20,11 +20,11 @@ a data frame where each row is a proxel
 For a given basic event and a proxel, this function
 calculates all the possible proxels for the next time step.
 }
-\details{
-A multi-state basic event with Weibull(2, 3) transition distribution function from working (OK) to an Intermediate State (IS), a fixed time of 0.5 transtion from IS to failure (F), and a fixed repair time of 0.1 (transition from state F to state OK).
-}
 \examples{
-delta <- 0.2
+#A multi-state basic event with Weibull(2, 3) transition distribution function
+#from working (OK) to an Intermediate State (IS), a fixed time of 0.5 transtion
+#from IS to failure (F), and a fixed repair time of 0.1 (transition from state F to state OK).
+delta <- 0.1
 BE <- list(
   states = c("OK", "IS", "F"),
   G = rbind(
@@ -36,7 +36,7 @@ BE <- list(
   param = list(c(2, 3), c(0.5 - delta, 0.5 + delta), c(0.1 - delta, 0.1 + delta))
 )
 proxel <- data.frame(State = "IS", ageInt = 0.1, Prob = 0.9)
-delta <- 0.2
+delta <- 0.1
 nextLevel(BE, proxel, delta)
 
 }
