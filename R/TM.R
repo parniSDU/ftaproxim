@@ -9,11 +9,9 @@
 #' @param G a matrix of 1's, 0's and NA's. 1 and NA: transition is possible, 0: transition is not possible
 #' @param dist a string vector of transition distribution functions
 #' @param param a list of parameters of the transition distribution functions
-#' @param ... other parameters
 #'
 #' @return  A numeric matrix of transition probabilities.
 #'
-#' @details The more details should be added.
 #'
 #' @examples
 #' ## failure distribution function Uniform(2, 2.5)
@@ -36,7 +34,7 @@
 #' param <- list(c(0.001))
 #' TM(G, dist, param, t, delta, states)
 #' @export
-TM <- function(G, dist, param, t, delta, states, ...) {
+TM <- function(G, dist, param, t, delta, states) {
   ns <- nrow(G)
   if (length(dist) == 1) {
     P <- eval(parse(text = paste("p", dist, sep = "")))

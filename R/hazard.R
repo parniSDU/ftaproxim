@@ -10,7 +10,9 @@
 #'
 #' @return  A numeric vector of hazard rate values.
 #'
-#' @details The more details should be added.
+#' @details Hazard rate functions defined as the ratio of the density
+#' function and the survival function. That is:
+#'
 #'
 #' @examples
 #' ## Standard normal distribution
