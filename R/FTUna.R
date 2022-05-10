@@ -14,6 +14,7 @@
 #'
 #'
 #' @examples
+#' \dontrun{
 #' A<-list(
 #'  states=c("OK","F"),
 #'  G=rbind(c(NA,1),
@@ -58,7 +59,7 @@
 #'
 #' #Plots
 #' x$Plot
-#'
+#'}
 #' @export
 FTUna<-function(belist,mcs,totaltime, delta, tol){
 

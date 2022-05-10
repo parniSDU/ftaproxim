@@ -26,6 +26,7 @@ This function returns a list where the first element is a data frame of unavaila
 and the second element is the plot of the unavailabilities
 }
 \examples{
+\dontrun{
 A<-list(
  states=c("OK","F"),
  G=rbind(c(NA,1),
@@ -70,5 +71,5 @@ x$Unavailability
 
 #Plots
 x$Plot
-
+}
 }

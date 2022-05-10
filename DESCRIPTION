@@ -12,6 +12,6 @@ Maintainer: Hossein Haghbin <haghbin@pgu.ac.ir>
 Description: A package for calculating instantaneous unavailabilities of the basic events along with the top event of a fault tree. You provide a fualt tree in terms of its minimal cut sets, along with reliability and maintainability distribution functions of the basic events. ftaproxim caculates and plots the instantaneous unavailabilities. Methods are derived from Horton (2002, ISBN: 3-936150-21-4), Niloofar and Lazarova-Molnar (2022) <DOI:10.1177/1748006X221076290>.
 License: GPL (>= 2)
 Encoding: UTF-8
-LazyData: true
+LazyData: TRUE
 RoxygenNote: 7.1.2
 Imports: dplyr,plyr
