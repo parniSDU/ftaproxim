@@ -14,6 +14,7 @@
 #'
 #'
 #' @examples
+#' \dontrun{
 #' A<-list(
 #'  states=c("OK","F"),
 #'  G=rbind(c(NA,1),
@@ -58,41 +59,37 @@
 #'
 #' #Plots
 #' x$Plot
-#'
+#'}
+#' @importFrom ggplot2 ggplot aes theme geom_line xlab
 #' @export
-FTUna<-function(belist,mcs,totaltime, delta, tol){
-
-  una<-NULL
-
-  for (i in names(belist)){
-    BE<-belist[[i]]
-    out<-ProxelBE(BE, "F", totaltime, delta, tol)
-    una<-cbind(una, out)
+FTUna <- function(belist, mcs, totaltime, delta, tol) {
+  una <- NULL
+  for (i in names(belist)) {
+    BE <- belist[[i]]
+    out <- ProxelBE(BE, "F", totaltime, delta, tol)
+    una <- cbind(una, out)
   }
-
-  colnames(una)<-names(belist)
-
-  te<-0
-  for (i in 1:length(mcs)){
-    if (length(mcs[[i]])==1){p<-una[,mcs[[i]]]}else{
-      p<-apply(una[,mcs[[i]]], 1, prod)
+  colnames(una) <- names(belist)
+  te <- 0
+  for (i in 1:length(mcs)) {
+    if (length(mcs[[i]]) == 1) {
+      p <- una[, mcs[[i]]]
+    } else {
+      p <- apply(una[, mcs[[i]]], 1, prod)
     }
-    te<-p+te
+    te <- p + te
   }
-outUna<- as.data.frame(cbind(una, TE=te))
+  outUna <- as.data.frame(cbind(una, TE = te))
+  timeSteps <- totaltime / delta
+  df <- NULL
+  for (i in 1:ncol(outUna)) {
+    dfp <- data.frame(Unavailability = outUna[, i], Time = 1:timeSteps, Event = names(outUna)[i])
+    df <- rbind(df, dfp)
+  }
+  p <- ggplot(df, aes(x = dfp$Time))
+  p <- p + geom_line(aes(y = dfp$Unavailability, colour = dfp$Event, linetype = dfp$Event), size = 0.75)
+  p <- p + theme(legend.position = "top") + xlab(label = "Time Steps")
 
-timeSteps<-totaltime/delta
-df<-NULL
-for (i in 1:ncol(outUna)){
-  dfp<-data.frame(Unavailability=outUna[,i],Time=1:timeSteps,Event=names(outUna)[i])
-  df<-rbind(df,dfp)
-}
-
-p <- ggplot(df, aes(x = Time))
-p <- p + geom_line(aes(y = Unavailability, colour = Event ,linetype = Event), size= 0.75)
-p <- p + theme(legend.position = "top")+ xlab(label = 'Time Steps')
-
-out<-list(Unavailability=outUna, Plot=p)
-
+  out <- list(Unavailability = outUna, Plot = p)
   return(out)
 }
