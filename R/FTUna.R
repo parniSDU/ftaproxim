@@ -86,8 +86,8 @@ FTUna <- function(belist, mcs, totaltime, delta, tol) {
     dfp <- data.frame(Unavailability = outUna[, i], Time = 1:timeSteps, Event = names(outUna)[i])
     df <- rbind(df, dfp)
   }
-  p <- ggplot(df, aes(x = dfp$Time))
-  p <- p + geom_line(aes(y = dfp$Unavailability, colour = dfp$Event, linetype = dfp$Event), size = 0.75)
+  p <- ggplot(df, aes(x = df$Time))
+  p <- p + geom_line(aes(y = df$Unavailability, colour = df$Event, linetype = df$Event), size = 0.75)
   p <- p + theme(legend.position = "top") + xlab(label = "Time Steps")
 
   out <- list(Unavailability = outUna, Plot = p)
