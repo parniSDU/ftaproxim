@@ -9,7 +9,7 @@ Authors@R: c(
     person("Hossein", "Haghbin", email = "haghbin@pgu.ac.ir",role = c("aut", "cre"),
         comment = c(ORCID = "0000-0001-8416-2354")))
 Maintainer: Hossein Haghbin <haghbin@pgu.ac.ir>
-Description: Calculation and plotting of instantaneous unavailabilities of basic events along with the top event of fault trees are issues important in reliability analysis of complex systems. Here, a fault tree is provided in terms of its minimal cut sets, along with reliability and maintainability distribution functions of the basic events. All the methods are derived from Horton (2002, ISBN: 3-936150-21-4), Niloofar and Lazarova-Molnar (2022) <DOI:10.1177/1748006X221076290>.
+Description: Calculation and plotting of instantaneous unavailabilities of basic events along with the top event of fault trees are issues important in reliability analysis of complex systems. Here, a fault tree is provided in terms of its minimal cut sets, along with reliability and maintainability distribution functions of the basic events. All the methods are derived from Horton (2002, ISBN: 3-936150-21-4), Niloofar and Lazarova-Molnar (2022) <doi:10.1177/1748006X221076290>.
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: TRUE
