@@ -14,7 +14,6 @@
 #'
 #'
 #' @examples
-#' \dontrun{
 #' A<-list(
 #'  states=c("OK","F"),
 #'  G=rbind(c(NA,1),
@@ -59,7 +58,7 @@
 #'
 #' #Plots
 #' x$Plot
-#'}
+#'
 #' @importFrom ggplot2 ggplot aes theme geom_line xlab
 #' @export
 FTUna <- function(belist, mcs, totaltime, delta, tol) {
