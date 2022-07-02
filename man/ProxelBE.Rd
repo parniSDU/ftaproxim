@@ -29,7 +29,6 @@ For a multistate event, if the state is IS this function returns a vector of
         instantaneous probabilities of being in the intermediate state
 }
 \examples{
-\dontrun{
 #A multi-state basic event with Weibull(2, 3) transition distribution function
 #from working (OK) to an Intermediate State (IS), a fixed time of 0.5 transtion
 #from IS to failure (F), and a fixed repair time of 0.1 (transition from state F to state OK).
@@ -44,7 +43,6 @@ BE <- list(
   dist = c("weibull", "unif", "unif"),
   param = list(c(2, 3), c(0.5 - delta, 0.5 + delta), c(0.1 - delta, 0.1 + delta))
 )
-probIS <- ProxelBE(BE, state = "IS", totaltime = 20, delta = 0.1, tol = 0.000000001)
+probIS <- ProxelBE(BE, state = "IS", totaltime = 5, delta = 0.2, tol = 0.000000001)
 plot(probIS, type = "l")
-}
 }

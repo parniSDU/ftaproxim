@@ -15,7 +15,6 @@
 #'         instantaneous probabilities of being in the intermediate state
 #'
 #' @examples
-#' \dontrun{
 #' #A multi-state basic event with Weibull(2, 3) transition distribution function
 #' #from working (OK) to an Intermediate State (IS), a fixed time of 0.5 transtion
 #' #from IS to failure (F), and a fixed repair time of 0.1 (transition from state F to state OK).
@@ -32,7 +31,7 @@
 #' )
 #' probIS <- ProxelBE(BE, state = "IS", totaltime = 5, delta = 0.2, tol = 0.000000001)
 #' plot(probIS, type = "l")
-#'}
+
 #' @importFrom plyr ldply
 #' @importFrom stats aggregate
 #' @export
