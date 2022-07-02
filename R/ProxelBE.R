@@ -30,7 +30,7 @@
 #'   dist = c("weibull", "unif", "unif"),
 #'   param = list(c(2, 3), c(0.5 - delta, 0.5 + delta), c(0.1 - delta, 0.1 + delta))
 #' )
-#' probIS <- ProxelBE(BE, state = "IS", totaltime = 20, delta = 0.1, tol = 0.000000001)
+#' probIS <- ProxelBE(BE, state = "IS", totaltime = 5, delta = 0.2, tol = 0.000000001)
 #' plot(probIS, type = "l")
 #'}
 #' @importFrom plyr ldply
