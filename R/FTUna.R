@@ -51,7 +51,7 @@
 #' names(BElist)<-c("A","B","C","D")
 #' MCS<-list(c("A", "C", "D"), c("B", "C", "D"))
 #'
-#' x<-FTUna(BElist, MCS, 10, 0.1, 1e-07)
+#' x<-FTUna(BElist, MCS, 5, 0.2, 1e-07)
 #'
 #' # Unavailabilities
 #' x$Unavailability
